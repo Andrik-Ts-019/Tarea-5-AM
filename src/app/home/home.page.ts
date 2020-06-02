@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Camera } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
 @Component({
@@ -10,18 +10,24 @@ import { File } from '@ionic-native/file/ngx';
 })
 export class HomePage {
 
+  fotos: any[];
   imgURL;
 
-  constructor(private camara: Camera) {}
+  constructor(private camara: Camera, public file: File) {}
 
   getCamera(){
-    this.camara.getPicture({
-      sourceType: this.camara.PictureSourceType.CAMERA,
-      destinationType: this.camara.DestinationType.FILE_URI
-    }).then((res)=>{
-      this.imgURL = res;
-    }).catch(e=>{
-      console.log(e);
+    var options: CameraOptions={
+      quality: 100,
+      mediaType: this.camara.MediaType.PICTURE,
+      destinationType: this.camara.DestinationType.FILE_URI,
+      encodingType: this.camara.EncodingType.JPEG
+    }
+    this.camara.getPicture().then((imagedata)=>{
+      let filename = imagedata.substring(imagedata.lastIndexOf('/')+1);
+      let path = imagedata.substring(0,imagedata.lastIndexOf('/')+1);
+      this.file.readAsDataURL(path,filename).then((base64data)=>{
+        this.fotos.push(base64data);
+      })
     })
   }
 
