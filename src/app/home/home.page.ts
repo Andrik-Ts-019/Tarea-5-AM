@@ -14,7 +14,10 @@ export class HomePage {
   constructor(private camara: Camera) {}
 
   getCamera(){
-    this.camara.getPicture().then((res)=>{
+    this.camara.getPicture({
+      sourceType: this.camara.PictureSourceType.CAMERA,
+      destinationType: this.camara.DestinationType.FILE_URI
+    }).then((res)=>{
       this.imgURL = res;
     }).catch(e=>{
       console.log(e);
@@ -22,7 +25,14 @@ export class HomePage {
   }
 
   getGalery(){
-
+    this.camara.getPicture({
+      sourceType: this.camara.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camara.DestinationType.DATA_URL
+    }).then((res)=>{
+      this.imgURL = 'data:image/jpeg;base64,' + res;
+    }).catch(e=>{
+      console.log(e);
+    })
   }
 
 }
