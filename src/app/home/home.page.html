@@ -1,21 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      CÁMARA
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">CÁMARA</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <ion-fab horizontal="center" vertical="bottom" slot="fixed">
-    <ion-fab-button color="light">
+    <ion-fab-button color="light" (click)="getCamera()">
       <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button [translucent]="true" (click)="getGalery()">
+      <ion-icon name="images-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
