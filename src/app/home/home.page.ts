@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-home',
